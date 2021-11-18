@@ -80,6 +80,18 @@ You can also pass the various migrations directly in your Datasource configurati
 
 You can set `migrations` simply to `true` if you which to use the default migration settings. 
 
+#### cake3 plugins
+
+With cake3 you have to make sure to load a plugin prior to calling Migrator, like:
+```php
+\Cake\Core\Plugin::load('FooPlugin');
+\CakephpTestMigrator\Migrator::migrate([     
+    ['plugin' => 'FooPlugin'],      
+    ...
+ ], ['verbose' => true]);
+```
+Keep in mind that `Plugin::load()` is deprecated sind cake 3.6, but plugins added into your `src/Application.php` won't get loaded in `tests/bootstrap.php otherwise.
+
 ### Migrations status
 
 Information on a connection's migration status will be obtained as follows:
